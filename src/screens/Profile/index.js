@@ -1,5 +1,5 @@
 import react from "react";
-import { View, Text } from "react-native-web";
+import { View, Text } from "react-native";
 
 // import Topo from "../Home/components/Topo";
 

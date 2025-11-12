@@ -1,7 +1,7 @@
 import react from "react";
-import { View, Text } from "react-native-web";
+import { View, Text } from "react-native";
 
-import Topo from "../Home/components/Topo";
+import Topo from "../Home/components/Top";
 
 export default function Sobre({ }){
     return(
