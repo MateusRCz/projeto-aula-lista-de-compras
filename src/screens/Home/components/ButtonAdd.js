@@ -47,8 +47,8 @@ const estilos = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#ffffffff",
-    height: "20%",
-    width: "80%",
+    height: 100,
+    width: 100,
     margin: 40,
   },
   inputModal: {

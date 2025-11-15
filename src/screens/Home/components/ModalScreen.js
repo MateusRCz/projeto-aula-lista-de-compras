@@ -1,23 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
-  Image,
   StyleSheet,
   TextInput,
   Pressable,
   Modal,
-  Alert,
-  Button,
 } from "react-native";
 
 export default function ModalScreen({ visible, onClose, values }) {
   const [nome, setNome] = useState("");
 
   const adicionarNome = () => {
-    if (nome == "") return;
+    if (nome === "") return;
     values(nome);
-    console.log("Enviando nome para main e fechando modal");
     onClose();
   };
 
@@ -25,41 +21,28 @@ export default function ModalScreen({ visible, onClose, values }) {
     <Modal
       visible={visible}
       onRequestClose={onClose}
-      transparent={false}
+      transparent={true} // 🔥 Importante para permitir o fundo visível
       animationType="fade"
-      backdropColor={"rgba(24,24,24,0.2)"}
     >
-      <View
-        style={{
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+      {/* Fundo escurecido */}
+      <View style={estilos.overlay}>
+        {/* Caixa do popup */}
         <View style={estilos.modal}>
-          <View style={{position: "absolute", top: 5, right: 5}}>
-            <Pressable style={estilos.botao} onPress={onClose}>
+          <View style={estilos.header}>
+            <Pressable style={estilos.botaoFechar} onPress={onClose}>
               <Text style={{ color: "white" }}>X</Text>
             </Pressable>
           </View>
 
-          <View style={estilos.modal2}>
-            <Text style={{fontSize: 30, color: "#484848"}}>Criar nova lista</Text>
-            <TextInput onChangeText={setNome} style={estilos.inputModal} />
-            <Pressable
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "#F17144",
-                width: 252,
-                height: 49,
-              }}
-              onPress={adicionarNome}
-            >
-              <Text style={{ color: "white", fontWeight: "bold" }}>
-                Adicionar nova lista
-              </Text>
+          <View style={estilos.modalContent}>
+            <Text style={estilos.titulo}>Criar nova lista</Text>
+            <TextInput
+              onChangeText={setNome}
+              style={estilos.inputModal}
+              placeholder="Digite o nome da lista"
+            />
+            <Pressable style={estilos.botaoAdd} onPress={adicionarNome}>
+              <Text style={estilos.textoBotao}>Adicionar nova lista</Text>
             </Pressable>
           </View>
         </View>
@@ -69,7 +52,24 @@ export default function ModalScreen({ visible, onClose, values }) {
 }
 
 const estilos = StyleSheet.create({
-  botao: {
+  overlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.5)", // 🔥 Fundo escuro transparente
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modal: {
+    backgroundColor: "#fff",
+    borderRadius: 20,
+    width: 347,
+    padding: 20,
+    alignItems: "center",
+  },
+  header: {
+    width: "100%",
+    alignItems: "flex-end",
+  },
+  botaoFechar: {
     backgroundColor: "#ff0d00ff",
     width: 30,
     height: 30,
@@ -77,28 +77,33 @@ const estilos = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  modal: {
-    display: "flex",
-    justifyContent: "center",
+  modalContent: {
     alignItems: "center",
-    
-    backgroundColor: "#ffffffff",
-    height: 272,
-    width: 347,
-    margin: 40,
-    borderRadius: 20,
+    marginTop: 10,
   },
-  modal2: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+  titulo: {
+    fontSize: 24,
+    color: "#484848",
+    marginBottom: 10,
   },
   inputModal: {
     borderColor: "#CBCBCB",
-    borderStyle: "solid",
     borderWidth: 1,
     borderRadius: 10,
     width: 281,
     margin: 10,
+    paddingHorizontal: 8,
+  },
+  botaoAdd: {
+    backgroundColor: "#F17144",
+    width: 252,
+    height: 49,
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  textoBotao: {
+    color: "white",
+    fontWeight: "bold",
   },
 });
