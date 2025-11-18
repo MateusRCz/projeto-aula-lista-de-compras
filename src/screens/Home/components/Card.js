@@ -1,35 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   View,
   Text,
-  Image,
   StyleSheet,
-  CheckBox,
   Button,
-  TextInput,
+  FlatList,
+  Pressable,
+  Image,
 } from "react-native";
-import { FlatList } from "react-native";
+import lixeira from "../../../assets/lixeira.svg";
+import editar from "../../../assets/cadastro.svg";
 
-// import cart from "./src/assets/cart.svg";
-
-export default function Card({ nome }) {
-  const [data, setData] = useState([]);
-  const [id, setId] = useState(0);
-
-
-  const Item = ({ nome }) => (
-    <View>
-      <View style={estilos.card}>
-        <View style={estilos.cardHeader}>
-          <Image />
-          <Text>{nome}</Text>
+export default function Card({ nomes, onEditar, onExcluir }) {
+  const renderCardItem = ({ item }) => (
+    <View style={estilos.card}>
+      <View style={estilos.conteudo}>
+        <View style={estilos.cardTitulo}>
+          <Text style={estilos.nomeLista}>{item.nome}</Text>
+          <Text style={estilos.data}>{item.data}</Text>
         </View>
 
-        <View style={estilos.cardHeader}>
-          <CheckBox />
-          <Text>Data de criação: 00/00/0000</Text>
-          <Button />
-          <Button color="#ff0000ff" />
+        <View style={estilos.icones}>
+          <Pressable onPress={() => onEditar(item)} style={estilos.botaoIcone}>
+            <Image source={editar} style={{ width: 24, height: 24 }} />
+          </Pressable>
+          <Pressable onPress={() => onExcluir(item)} style={estilos.botaoIcone}>
+            <Image source={lixeira} style={{ width: 24, height: 24 }} />
+          </Pressable>
         </View>
       </View>
     </View>
@@ -37,28 +34,50 @@ export default function Card({ nome }) {
 
   return (
     <FlatList
-      data={data}
-      renderItem={({ item }) => <Item title={item.nome} />}
-      keyExtractor={(item) => item.id}
+      data={nomes}
+      keyExtractor={(item, index) => index.toString()}
+      renderItem={renderCardItem}
+      scrollEnabled={true}
     />
   );
 }
 
 const estilos = StyleSheet.create({
   card: {
-    display: "flex",
-    alignItems: "center",
     backgroundColor: "#F5F5F5",
     borderColor: "#cbc7c7ff",
     borderWidth: 1,
-    borderStyle: "solid",
-    height: 100,
-    margin: 20,
-    padding: 20,
     borderRadius: 20,
+    margin: 5,
+    padding: 15,
+    minHeight: 100,
   },
-  cardHeader: {
-    display: "flex",
+  conteudo: {
     flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 15,
+  },
+  cardTitulo: {
+    flex: 1,
+    flexDirection: "column",
+    gap: 5,
+  },
+  nomeLista: {
+    fontWeight: "bold",
+    fontSize: 16,
+    color: "#333",
+  },
+  data: {
+    fontSize: 12,
+    color: "#666",
+  },
+  icones: {
+    flexDirection: "column",
+    gap: 10,
+    alignItems: "center",
+  },
+  botaoIcone: {
+    padding: 5,
   },
 });

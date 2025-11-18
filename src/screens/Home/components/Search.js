@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, Image, StyleSheet, TextInput } from "react-native";
 
-export default function Pesquisa() {
+export default function Search({query, setQuery}) {
+
+
   return (
     <View>
-      <TextInput
+      <TextInput onChangeText={setQuery}
+        
         style={estilos.input}
         placeholder="Pesquisar por listas"
       ></TextInput>
