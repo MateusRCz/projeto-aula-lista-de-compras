@@ -1,6 +1,7 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, SafeAreaView } from "react-native";
 import { useState, useEffect } from "react";
+import { useNavigation } from "@react-navigation/native";
 import Top from "./components/Top";
 import Search from "./components/Search";
 import Card from "./components/Card";
@@ -9,8 +10,8 @@ import ModalEditar from "./components/ModalEditar";
 import ModalExcluir from "./components/ModalExcluir";
 import ButtonAdd from "./components/ButtonAdd";
 
-// import plus from "./src/assets/plus.svg";
 export default function Home() {
+  const navigation = useNavigation();
   const [card, setCard] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalEditarVisible, setModalEditarVisible] = useState(false);
@@ -46,12 +47,17 @@ export default function Home() {
     card.nome.toLowerCase().includes(query.toLowerCase())
   );
 
+  const abrirDetalhes = (item) => {
+    navigation.navigate("Details", { item });
+  };
+
   return (
-    <View style={estilos.tela}>
+    <SafeAreaView style={estilos.tela}>
       <Top />
       <Search setQuery={setQuery} />
       <Card
         nomes={fazerPesquisa}
+        onPress={abrirDetalhes}
         onEditar={(item) => { setItemSelecionado(item); setModalEditarVisible(true); }}
         onExcluir={(item) => { setItemSelecionado(item); setModalExcluirVisible(true); }}
       />
@@ -73,7 +79,7 @@ export default function Home() {
         item={itemSelecionado}
       />
       <ButtonAdd valor={setModalVisible} />
-    </View>
+    </SafeAreaView>
   );
 }
 
