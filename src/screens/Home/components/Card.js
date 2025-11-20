@@ -8,12 +8,13 @@ import {
   Pressable,
   Image,
 } from "react-native";
-import lixeira from "../../../assets/lixeira.svg";
-import editar from "../../../assets/cadastro.svg";
 
-export default function Card({ nomes, onEditar, onExcluir }) {
+import Feather from '@expo/vector-icons/Feather';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+
+export default function Card({ nomes, onEditar, onExcluir, onPress }) {
   const renderCardItem = ({ item }) => (
-    <View style={estilos.card}>
+    <Pressable onPress={() => onPress(item)} style={estilos.card}>
       <View style={estilos.conteudo}>
         <View style={estilos.cardTitulo}>
           <Text style={estilos.nomeLista}>{item.nome}</Text>
@@ -22,14 +23,14 @@ export default function Card({ nomes, onEditar, onExcluir }) {
 
         <View style={estilos.icones}>
           <Pressable onPress={() => onEditar(item)} style={estilos.botaoIcone}>
-            <Image source={editar} style={{ width: 24, height: 24 }} />
+            <Feather name="edit" size={20} color="black" />
           </Pressable>
           <Pressable onPress={() => onExcluir(item)} style={estilos.botaoIcone}>
-            <Image source={lixeira} style={{ width: 24, height: 24 }} />
+            <MaterialIcons name="delete" size={24} color="red" />
           </Pressable>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 
   return (

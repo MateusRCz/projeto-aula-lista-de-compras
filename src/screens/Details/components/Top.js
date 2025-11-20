@@ -3,12 +3,18 @@ import { View, Text, Image, StyleSheet, TextInput } from "react-native";
 
 import compras from "../../../assets/carrinhoCompras.png"
 
+import { useRoute } from "@react-navigation/native";
+
+
 export default function Topo() {
+
+    const route = useRoute();
+    const { item } = route.params;
 
     return ( 
         <View style={estilos.topo}>
             <Image source={compras} style={estilos.iconeTopo} />
-            <Text style={estilos.text}>Compras do Mês</Text>
+            <Text style={estilos.text}>{item.nome}</Text>
         </View>
 )};
 
@@ -18,7 +24,7 @@ const estilos = StyleSheet.create({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: 55,
+        height: 85,
         flexDirection: "row",
     },
     text:{

@@ -19,6 +19,7 @@ export default function Home() {
   const [itemSelecionado, setItemSelecionado] = useState(null);
   const [query, setQuery] = useState("");
 
+  
   function adicionarLista(nome) {
     const now = new Date();
     const dateFormat = now.toLocaleDateString("pt-BR");
@@ -49,6 +50,7 @@ export default function Home() {
 
   const abrirDetalhes = (item) => {
     navigation.navigate("Details", { item });
+    console.log('Tentou abrir a lsita', item.nome)
   };
 
   return (
