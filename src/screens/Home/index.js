@@ -1,6 +1,5 @@
-import React from "react";
-import { StyleSheet, View, SafeAreaView } from "react-native";
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { StyleSheet, SafeAreaView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Top from "./components/Top";
 import Search from "./components/Search";
@@ -19,7 +18,6 @@ export default function Home() {
   const [itemSelecionado, setItemSelecionado] = useState(null);
   const [query, setQuery] = useState("");
 
-  
   function adicionarLista(nome) {
     const now = new Date();
     const dateFormat = now.toLocaleDateString("pt-BR");
@@ -50,7 +48,7 @@ export default function Home() {
 
   const abrirDetalhes = (item) => {
     navigation.navigate("Details", { item });
-    console.log('Tentou abrir a lsita', item.nome)
+    console.log("Tentou abrir a lista", item.nome);
   };
 
   return (

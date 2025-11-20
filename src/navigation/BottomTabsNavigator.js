@@ -1,25 +1,36 @@
-import React from "react";
-import { Text } from "react-native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Home from "../screens/Home/index";
-import Details from "../screens/Details/index";
-import Profile from "../screens/Profile/index";
-
+import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Ionicons } from '@expo/vector-icons';
 
+import Home from '../screens/Home';
+import Details from '../screens/Details';
+import Profile from '../screens/Profile';
+
 const Tab = createBottomTabNavigator();
+const HomeStack = createNativeStackNavigator();
+
+// Stack interno da aba Home
+function HomeStackNavigator() {
+  return (
+    <HomeStack.Navigator screenOptions={{ headerShown: false }}>
+      <HomeStack.Screen name="Home" component={Home} />
+      <HomeStack.Screen name="Details" component={Details} />
+    </HomeStack.Navigator>
+  );
+}
 
 export default function BottomTabsNavigator() {
   return (
     <Tab.Navigator>
       <Tab.Screen
         name="Home"
-        component={Home}
+        component={HomeStackNavigator}
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size, focused }) => (
             <Ionicons
-              name={focused ? "home" : "home-outline"}
+              name={focused ? 'home' : 'home-outline'}
               size={size}
               color={color}
             />
@@ -33,7 +44,7 @@ export default function BottomTabsNavigator() {
           headerShown: false,
           tabBarIcon: ({ color, size, focused }) => (
             <Ionicons
-              name={focused ? "person" : "person-outline"}
+              name={focused ? 'person' : 'person-outline'}
               size={size}
               color={color}
             />
