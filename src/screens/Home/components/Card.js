@@ -17,7 +17,7 @@ export default function Card({ nomes, onEditar, onExcluir, onPress }) {
     <Pressable onPress={() => onPress(item)} style={estilos.card}>
       <View style={estilos.conteudo}>
         <View style={estilos.cardTitulo}>
-          <Text style={estilos.nomeLista}>{item.nome}</Text>
+          <Text style={estilos.nomeLista}>{item.nameList}</Text>
           <Text style={estilos.data}>{item.data}</Text>
         </View>
 

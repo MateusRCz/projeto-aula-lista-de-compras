@@ -9,6 +9,8 @@ import ModalEditar from "./components/ModalEditar";
 import ModalExcluir from "./components/ModalExcluir";
 import ButtonAdd from "./components/ButtonAdd";
 
+import { mockLists } from "../../mock/lists";
+
 export default function Home() {
   const navigation = useNavigation();
   const [card, setCard] = useState([]);
@@ -22,7 +24,19 @@ export default function Home() {
     const now = new Date();
     const dateFormat = now.toLocaleDateString("pt-BR");
     const hourFormat = now.toLocaleTimeString("pt-BR");
-    const novoCard = { nome, data: `${dateFormat} ${hourFormat}` };
+    const id = Date.now().toString();
+
+    const novoCard = { 
+      id: id, 
+      nameList: nome, 
+      data: `${dateFormat} ${hourFormat}`,
+      items: []
+    }; 
+
+    mockLists.push(novoCard);
+    // const nomes = mockLists.map(lista => lista.nameList);
+    
+    // console.log(mockLists);
     setCard(prev => [...prev, novoCard]);
   }
 
@@ -43,12 +57,12 @@ export default function Home() {
   }
 
   const fazerPesquisa = card.filter(card =>
-    card.nome.toLowerCase().includes(query.toLowerCase())
+    card.nameList.toLowerCase().includes(query.toLowerCase())
   );
 
   const abrirDetalhes = (item) => {
     navigation.navigate("Details", { item });
-    console.log("Tentou abrir a lista", item.nome);
+    // console.log("Tentou abrir a lista", item.nameList);
   };
 
   return (

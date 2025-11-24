@@ -14,7 +14,7 @@ import {
 export default function ButtonAdd({ valor }) {
   const abrirModal = () => {
     valor(true);
-    console.log("Clicado");
+    // console.log("Clicado");
   };
 
   return (

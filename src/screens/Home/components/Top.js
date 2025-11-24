@@ -15,6 +15,7 @@ const estilos = StyleSheet.create({
         display: "flex",
         justifyContent: "center",
         height: 55,
+        marginTop: 35,
         paddingLeft: 15,
         alignItems: "center",
     },

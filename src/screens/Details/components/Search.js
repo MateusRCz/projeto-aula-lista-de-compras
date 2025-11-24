@@ -1,48 +1,64 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Pressable, TextInput } from "react-native";
-import { Button, FlatList } from "react-native-web"; //eliminar
 import Box from "./Box";
+import { mockLists } from "../../../mock/lists";
 
-export default function Search({query, setQuery}) {
+export default function Search({ idList }) {
   const [boxes, setBoxes] = useState([]);
   const [nextId, setNextId] = useState(1);
+  const [itemTexto, setItemTexto] = useState("");
+  const [quantidadeTexto, setQuantidadeTexto] = useState("");
+
+  const lista = mockLists.find((l) => l.id === idList);
+
+  // const teste = boxes.forEach((element) => {
+  //     // console.log("Nome: ", element.id);
+      
+  //   });
+
+  useEffect(() => {
+    const lista = mockLists.find((l) => l.id === idList);
+
+
+    if(lista) setBoxes([...lista.items]);
+
+  }, []); 
 
   const adicionarBox = () => {
-  if (itemTexto.trim() === '' || quantidadeTexto.trim() === '') return;
+    if (itemTexto.trim() === "" || quantidadeTexto.trim() === "") return;
 
-  const novaBox = {
-    id: nextId,
-    item: itemTexto,
-    quantidade: quantidadeTexto,
-    flag: true, 
+    const novaBox = {
+      id: Date.now().toString(),
+      itemName: itemTexto,
+      quantity: quantidadeTexto,
+    };
+
+    console.log(nextId);
+
+    const lista = mockLists.find((l) => l.id === idList);
+    lista.items.push(novaBox);
+
+
+    setBoxes(prev => [...prev, novaBox]);
+    setNextId(nextId + 1);
+    console.log(nextId);
+
+    setItemTexto("");
+    setQuantidadeTexto("");
+  };
+  const editarBox = (id, novoItem, novaQuantidade) => {
+    setBoxes((prev) =>
+      prev.map((box) =>
+        box.id === id
+          ? { ...box, itemName: novoItem, quantity: novaQuantidade }
+          : box
+      )
+    );
   };
 
-  setBoxes([...boxes, novaBox]);
-  setNextId(nextId + 1);
-
-  
-  setItemTexto('');
-  setQuantidadeTexto('');
-};
-const editarBox = (id, novoItem, novaQuantidade) => {
-  setBoxes(prev =>
-    prev.map(box =>
-      box.id === id
-        ? { ...box, item: novoItem, quantidade: novaQuantidade }
-        : box
-    )
-  );
-};
-
-const excluirBox = (id) => {
-    setBoxes(boxes.filter(box => box.id !== id));
+  const excluirBox = (id) => {
+    setBoxes(boxes.filter((box) => box.id !== id));
   };
-
-
-
-  const [itemTexto, setItemTexto] = useState('');
-  const [quantidadeTexto, setQuantidadeTexto] = useState('');
-
 
   return (
     <View>
@@ -56,7 +72,7 @@ const excluirBox = (id) => {
           value={itemTexto}
           onChangeText={setItemTexto}
           style={estilos.input}
-          placeholder="Digite um item"
+          placeholder="Digite o nome do item"
           placeholderTextColor="grey"
         />
         <TextInput
@@ -68,21 +84,21 @@ const excluirBox = (id) => {
         />
 
         <Pressable onPress={adicionarBox} style={estilos.botao}>
-          <Text style={{ fontSize: 30, color: "white"}}>+</Text>
+          <Text style={{ fontSize: 30, color: "white" }}>+</Text>
         </Pressable>
       </View>
-      {boxes.map((box) => (
-        <Box
-          key={box.id}
-          id={box.id}
-          item={box.item}
-          quantidade={box.quantidade}
-          flag={box.flag}
-          onEdit={editarBox}
-          onDelete={excluirBox}
-        />
-      ))}
-
+      <View style={{ paddingHorizontal: 20}}>
+        {boxes.map((box) => (
+          <Box
+            key={box.id}
+            id={box.id}
+            item={box.itemName}
+            quantidade={box.quantity}
+            onEdit={editarBox}
+            onDelete={excluirBox}
+          />
+        ))}
+      </View>
     </View>
   );
 }
@@ -95,7 +111,7 @@ const estilos = StyleSheet.create({
     borderColor: "#cbc7c7ff",
     borderWidth: 1,
     borderRadius: 10,
-    height: 44, 
+    height: 44,
     color: "#000000ff",
   },
   textHead: {
@@ -103,7 +119,7 @@ const estilos = StyleSheet.create({
     fontSize: 16,
     color: "#000000ff",
   },
-  sideView:{
+  sideView: {
     margin: 20,
     marginBottom: 0,
     alignItems: "center",

@@ -112,6 +112,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     flexDirection: 'row',
     alignItems: 'center',
+    marginTop: 35,
     gap: 12,
   },
   headerTitle: {

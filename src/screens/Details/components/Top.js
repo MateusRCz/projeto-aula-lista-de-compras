@@ -14,7 +14,7 @@ export default function Topo() {
     return ( 
         <View style={estilos.topo}>
             <Image source={compras} style={estilos.iconeTopo} />
-            <Text style={estilos.text}>{item.nome}</Text>
+            <Text style={estilos.text}>{item.nameList}</Text>
         </View>
 )};
 
@@ -25,6 +25,8 @@ const estilos = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         height: 85,
+        marginTop: 35,
+        width: '100%',
         flexDirection: "row",
     },
     text:{

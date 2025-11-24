@@ -18,7 +18,6 @@ export default function BotaoAdd({ OnInputChange }) {
   const criarCard = () => {
     
     OnInputChange(nome);
-    console.log(nome);
     setModalVisible(false);
     
   };

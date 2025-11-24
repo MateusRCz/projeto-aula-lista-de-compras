@@ -6,22 +6,14 @@ import Pesquisa from "./components/Search";
 
 export default function Details() {
   const route = useRoute();
-  const { item } = route.params || {};
+  const { item } = route.params;
+
+  // console.log(item.id);
 
   return (
     <View style={estilos.tela}>
       <Topo />
-      <Pesquisa />
-
-      {item ? (
-        <View style={estilos.card}>
-          <Text style={estilos.titulo}>Detalhes da Lista</Text>
-          <Text style={estilos.texto}>Nome: {item.nome}</Text>
-          <Text style={estilos.texto}>Data: {item.data}</Text>
-        </View>
-      ) : (
-        <Text style={estilos.texto}>Nenhum item selecionado.</Text>
-      )}
+      <Pesquisa idList={item.id}/>
     </View>
   );
 }
@@ -30,7 +22,7 @@ const estilos = StyleSheet.create({
   tela: {
     flex: 1,
     backgroundColor: "#EDEDED",
-    padding: 16,
+    
   },
   card: {
     marginTop: 20,
