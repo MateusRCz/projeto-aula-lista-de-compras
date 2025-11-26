@@ -23,12 +23,14 @@ export default function ButtonAdd({ valor }) {
         display: "flex",
         justifyContent: "flex-end",
         alignItems: "flex-end",
-        margin: 10,
+        margin: 20,
       }}
     >
-      <Pressable onPress={abrirModal} style={estilos.botao}>
-        <Text style={{ fontSize: 30, color: "white" }}>+</Text>
-      </Pressable>
+    <Pressable onPress={abrirModal} style={estilos.botao}>
+      <View style={{justifyContent: "center", alignItems: "center", flex: 1}}>
+        <Text style={{ fontSize: 35, color: "white", fontWeight: "bold", lineHeight: 35, textAlign: "center" }}>+</Text>
+      </View>
+    </Pressable>
     </View>
   );
 }

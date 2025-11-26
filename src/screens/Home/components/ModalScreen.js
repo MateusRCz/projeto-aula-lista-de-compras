@@ -86,14 +86,16 @@ const estilos = StyleSheet.create({
     color: "#484848",
     marginBottom: 10,
   },
-  inputModal: {
-    borderColor: "#CBCBCB",
-    borderWidth: 1,
-    borderRadius: 10,
-    width: 281,
-    margin: 10,
-    paddingHorizontal: 8,
-  },
+inputModal: {
+  borderColor: "#CBCBCB",
+  borderWidth: 1,
+  borderRadius: 10,
+  width: 320,            // ⬅️ aumente aqui!
+  margin: 10,
+  paddingHorizontal: 12, // Deixe mais fofo!
+  height: 42,            // Deixe mais alto para melhorar o toque
+  alignSelf: "center",   // ⬅️ centraliza se o pai for column ou alignItems não for stretch
+},
   botaoAdd: {
     backgroundColor: "#F17144",
     width: 252,
