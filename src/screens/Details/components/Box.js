@@ -86,7 +86,7 @@ const estilos = StyleSheet.create({
     borderRadius: 8,
     padding: 8,
     marginBottom: 5,
-    height: 30
+    height: 35
   },
   edit: {
     marginLeft: 6, padding: 7,

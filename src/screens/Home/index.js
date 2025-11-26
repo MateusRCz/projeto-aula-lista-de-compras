@@ -34,9 +34,6 @@ export default function Home() {
     }; 
 
     mockLists.push(novoCard);
-    // const nomes = mockLists.map(lista => lista.nameList);
-    
-    // console.log(mockLists);
     setCard(prev => [...prev, novoCard]);
   }
 
@@ -44,7 +41,7 @@ export default function Home() {
     if (!itemSelecionado) return;
     setCard(prev =>
       prev.map(item =>
-        item === itemSelecionado ? { ...item, nome: novoNome } : item
+        item === itemSelecionado ? { ...item, nameList: novoNome } : item
       )
     );
     setModalEditarVisible(false);
