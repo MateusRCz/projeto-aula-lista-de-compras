@@ -18,7 +18,6 @@ Durante esse projeto utilizamos:
 * React Native 
 * JavaScript (ES6+)  
 * Node.js
-* CSS/HTML  
 * React Navigation
 * Expo
   
