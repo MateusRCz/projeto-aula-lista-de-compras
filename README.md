@@ -1,5 +1,6 @@
 ## React: Lista de Compras
 
+
 ## Projeto Aula - Lista de Compras
 Uma aplicação simples para gerenciar itens de uma lista de compras.
 
